@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Niki Kotecha — PhD Researcher in AI</title>
+  <meta name="description" content="Niki Kotecha — PhD Researcher in AI at Imperial College London. Multi-Agent Reinforcement Learning, Graph Neural Networks, Complex Decision-Making." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #ffffff;
+      --bg-soft:      #f7f7fb;
+      --bg-card:      #ffffff;
+      --text:         #0f0e17;
+      --text-muted:   #5c5f72;
+      --text-light:   #9ca3af;
+      --accent:       #6366f1;
+      --accent-dark:  #4f46e5;
+      --accent-light: #e0e7ff;
+      --accent-soft:  #f5f3ff;
+      --border:       #e4e4ee;
+      --border-soft:  #f0f0f7;
+      --mono:         'JetBrains Mono', monospace;
+      --sans:         'Inter', sans-serif;
+      --shadow-sm:    0 1px 4px rgba(0,0,0,0.06);
+      --shadow:       0 4px 20px rgba(0,0,0,0.08);
+      --radius:       14px;
+      --radius-sm:    8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo .accent { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+      font-family: var(--mono);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 2.5rem 5rem;
+      max-width: 1080px; margin: 0 auto;
+    }
+
+    .hero-content { max-width: 680px; }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); background: var(--accent-soft);
+      border: 1px solid var(--accent-light);
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      margin-bottom: 1.75rem; letter-spacing: 0.04em;
+    }
+    .hero-pill .hash { opacity: 0.45; margin-right: 2px; }
+
+    h1 {
+      font-size: clamp(3.2rem, 6.5vw, 5.2rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.04;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 0.9rem;
+      line-height: 1.7;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 2.75rem;
+      max-width: 560px;
+    }
+
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    }
+
+    /* ─── BUTTONS ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.65rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all 0.2s ease;
+    }
+    .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(99,102,241,0.38);
+    }
+
+    .btn-ghost {
+      background: var(--bg-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* ─── LAYOUT HELPERS ──────────────────────────────── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .divider { height: 1px; background: var(--border); max-width: 1080px; margin: 0 auto; }
+
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-eyebrow::before { content: '# '; opacity: 0.45; }
+
+    h2 {
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-lead {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    .about-with-photo {
+      display: flex;
+      align-items: flex-start;
+      gap: 3.5rem;
+    }
+
+    .about-photo-wrap {
+      flex-shrink: 0;
+    }
+
+    .about-photo {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--border);
+      box-shadow: 0 8px 32px rgba(99,102,241,0.13);
+      display: block;
+      transition: box-shadow 0.3s;
+    }
+    .about-photo:hover {
+      box-shadow: 0 8px 32px rgba(99,102,241,0.28);
+    }
+
+    @media (max-width: 680px) {
+      .about-with-photo {
+        flex-direction: column-reverse;
+        gap: 2rem;
+      }
+      .about-photo {
+        width: 140px;
+        height: 140px;
+      }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem; align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-muted); line-height: 1.9;
+      font-size: 1.02rem; margin-bottom: 1.25rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+
+
+    /* ─── TIMELINE ────────────────────────────────────── */
+    .timeline { position: relative; display: flex; flex-direction: column; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+
+    .tl-item { padding-left: 2rem; padding-bottom: 2.75rem; position: relative; }
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-dot {
+      position: absolute; left: -5px; top: 5px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .tl-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.35rem; flex-wrap: wrap;
+    }
+
+    .tl-date {
+      font-family: var(--mono); font-size: 0.73rem;
+      color: var(--text-light); letter-spacing: 0.03em;
+    }
+
+    .badge {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+      padding: 0.15rem 0.55rem; border-radius: 100px;
+      background: var(--accent-soft); color: var(--accent);
+      border: 1px solid var(--accent-light);
+    }
+
+    .tl-role { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.15rem; }
+    .tl-company { font-size: 0.88rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.75rem; }
+
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .tl-bullets li {
+      font-size: 0.9rem; color: var(--text-muted);
+      padding-left: 1.3rem; position: relative; line-height: 1.65;
+    }
+    .tl-bullets li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-size: 0.78rem; top: 0.05em;
+    }
+
+    /* ─── PROJECTS ────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover {
+      border-color: var(--accent-light);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1rem;
+      font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); text-decoration: none; letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+    .project-link:hover { opacity: 0.65; }
+    .project-link svg { width: 13px; height: 13px; }
+
+    .project-icon {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; flex-shrink: 0;
+    }
+
+    .project-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.55rem; line-height: 1.4; }
+
+    .project-desc {
+      font-size: 0.875rem; color: var(--text-muted);
+      line-height: 1.75; margin-bottom: 1.25rem; flex: 1;
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+    .tag {
+      font-family: var(--mono); font-size: 0.69rem;
+      padding: 0.2rem 0.6rem; border-radius: 4px;
+      background: var(--border-soft); color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── EDUCATION ───────────────────────────────────── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+    .edu-card {
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.85rem;
+      transition: all 0.2s;
+    }
+    .edu-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-sm); }
+
+    .edu-school {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.07em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .edu-degree { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.25rem; line-height: 1.4; }
+    .edu-date { font-family: var(--mono); font-size: 0.75rem; color: var(--text-light); margin-bottom: 0.85rem; }
+    .edu-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
+
+
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    .contact-wrap {
+      background: var(--bg-soft); border-top: 1px solid var(--border);
+    }
+
+    .contact-inner { max-width: 1080px; margin: 0 auto; padding: 5rem 2.5rem 3rem; }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.2rem; border-radius: var(--radius-sm);
+      font-size: 0.85rem; font-weight: 500; text-decoration: none;
+      color: var(--text-muted); border: 1px solid var(--border);
+      background: var(--bg-card); transition: all 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+    .contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    footer {
+      max-width: 1080px; margin: 0 auto;
+      padding: 1.5rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-text { font-family: var(--mono); font-size: 0.75rem; color: var(--text-light); }
+
+    /* ─── SCROLL ANIMATIONS ───────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── MOBILE MENU ─────────────────────────────────── */
+    .mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2.5rem; z-index: 99;
+      flex-direction: column; gap: 1.25rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono); font-size: 0.9rem; font-weight: 500;
+      color: var(--text-muted); text-decoration: none;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .about-grid, .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-inner { padding: 3.5rem 1.5rem 2rem; }
+      footer { padding: 1.25rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1.5rem; }
+      #hero { padding: 6rem 1.5rem 3rem; }
+      .container { padding: 3.5rem 1.5rem; }
+      h1 { font-size: 2.8rem; }
+      .stat-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">nk<span class="accent">.</span>dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="closeMenu()">about</a>
+  <a href="#experience" onclick="closeMenu()">experience</a>
+  <a href="#projects"   onclick="closeMenu()">projects</a>
+  <a href="#education"  onclick="closeMenu()">education</a>
+
+  <a href="#contact"    onclick="closeMenu()">contact</a>
+</div>
+
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-content fade-up">
+    <div class="hero-pill">
+      <span class="hash">#</span> PhD Researcher · Imperial College London
+    </div>
+    <h1>Niki<br>Kotecha</h1>
+    <p class="hero-sub">
+      <strong>Artificial Intelligence</strong> · Multi-Agent Systems · Complex Decision-Making
+    </p>
+    <p class="hero-desc">
+      Building scalable autonomous agents for complex system decision-making.
+      Research at the intersection of multi-agent reinforcement learning, graph neural networks,
+      and game theory.
+    </p>
+    <div class="hero-cta">
+      <a href="https://www.linkedin.com/in/niki-kotecha/" target="_blank" class="btn btn-primary">
+        <!-- LinkedIn -->
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/nikikotecha" target="_blank" class="btn btn-ghost">
+        <!-- GitHub -->
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://scholar.google.co.uk/citations?user=Wc-R7-gAAAAJ&hl=en&oi=ao" target="_blank" class="btn btn-ghost">
+        <!-- Scholar cap -->
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+        Scholar
+      </a>
+      <a href="mailto:nikikotecha6@gmail.com" class="btn btn-ghost">
+        <!-- Email -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── ABOUT ─────────────────────────────────────────── -->
+<div class="container" id="about">
+  <div class="section-eyebrow">about</div>
+  <h2>Who I Am</h2>
+  <div class="about-with-photo fade-up">
+    <div class="about-text" style="max-width: 580px;">
+      <p>
+        I'm a PhD researcher at <strong>Imperial College London</strong> working at the
+        intersection of machine learning, game theory, and complex systems. My research
+        focuses on building scalable autonomous agents capable of making decisions in
+        high-dimensional, uncertain, multi-agent environments.
+      </p>
+      <p>
+        Before my PhD, I read Chemical Engineering at <strong>Cambridge</strong> (MEng/BA),
+        which gave me a strong foundation in systems thinking, optimisation, and
+        quantitative modelling — skills I now apply to multi-agent RL and decision-making.
+      </p>
+      <p>
+        Outside research, I've worked as an <strong>AI Researcher at Ergodic AI</strong>,
+        building autonomous LLM-based agents, and as an <strong>Associate at Creator Fund</strong>,
+        evaluating early-stage deep-tech startups — bridging research and the real world.
+      </p>
+    </div>
+    <div class="about-photo-wrap">
+      <img src="NikiKotechaheadshot.jpg" alt="Niki Kotecha" class="about-photo" />
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── EXPERIENCE ────────────────────────────────────── -->
+<div class="container" id="experience">
+  <div class="section-eyebrow">experience</div>
+  <h2>Where I've Worked</h2>
+  <p class="section-lead">Industry experience spanning AI research and venture capital, bridging cutting-edge research with real-world deployment.</p>
+  <div class="timeline fade-up">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-date">Feb 2025 – Jul 2025</span>
+        <span class="badge">AI Research</span>
+      </div>
+      <div class="tl-role">AI Researcher</div>
+      <div class="tl-company">Ergodic AI &mdash; Remote / London, UK</div>
+      <ul class="tl-bullets">
+        <li>Developed autonomous LLM-based agents for multi-step problem-solving and planning</li>
+        <li>Built multi-agent frameworks for distributed decision-making and task delegation</li>
+        <li>Engineered synthetic datasets with embedded causal structures for model robustness</li>
+        <li>Translated research into deployable solutions in collaboration with cross-functional teams</li>
+        <li>End-to-end implementation in Python, PyTorch, HPC and GPU workflows</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-date">Oct 2023 – Jul 2025</span>
+        <span class="badge">Venture Capital</span>
+      </div>
+      <div class="tl-role">Associate</div>
+      <div class="tl-company">Creator Fund &mdash; London, UK</div>
+      <ul class="tl-bullets">
+        <li>Conducted technical due diligence and market research on 20+ early-stage AI, robotics, and biotech startups</li>
+        <li>Evaluated 3 pre-seed startups for product-market fit, technical feasibility, and defensibility</li>
+        <li>Advised internal investment committee, contributing to £2M in potential investments</li>
+        <li>Identified emerging trends in deep-tech sectors to inform strategic planning</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── PROJECTS ──────────────────────────────────────── -->
+<div class="container" id="projects">
+  <div class="section-eyebrow">research &amp; projects</div>
+  <h2>What I've Built</h2>
+  <p class="section-lead">Research projects at the frontier of multi-agent systems, reinforcement learning, and complex optimisation.</p>
+  <div class="projects-grid fade-up">
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M12 11l-5 6M12 11l5 6"/></svg>
+      </div>
+      <div class="project-title">MARL &amp; GNNs for Inventory Management</div>
+      <div class="project-desc">
+        Optimised supply chain inventory decisions using multi-agent RL and graph neural
+        networks for agent coordination. Benchmarked PPO and DDPG algorithms in dynamic
+        supply chain environments.
+      </div>
+      <div class="project-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">Ray RLLib</span>
+        <span class="tag">PyG</span>
+        <span class="tag">MARL</span>
+        <span class="tag">HPC / GPU</span>
+      </div>
+      <a href="https://github.com/nikikotecha/MultiAgentRL_InventoryControl" target="_blank" class="project-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="project-title">MORSE — Multi-Objective RL via Strategy Evolution</div>
+      <div class="project-desc">
+        Combined NSGA-II evolutionary algorithms with RL to generate a Pareto front of
+        policies for supply chain optimisation. Integrates CVaR for risk-sensitive
+        decision-making under disruptions.
+      </div>
+      <div class="project-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">NSGA-II</span>
+        <span class="tag">CVaR</span>
+        <span class="tag">Pareto Optimisation</span>
+        <span class="tag">GPU</span>
+      </div>
+      <a href="https://github.com/nikikotecha/MORSE" target="_blank" class="project-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="project-title">Weighted Mean Field MARL with Importance Sampling</div>
+      <div class="project-desc">
+        Theoretical framework inspired by importance sampling to correct temporal
+        distribution shifts in large mean-field multi-agent systems. Demonstrated
+        improved coordination and decision-making in high-dimensional environments.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Mean Field Theory</span>
+        <span class="tag">Importance Sampling</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">MARL</span>
+      </div>
+      <a href="https://github.com/nikikotecha/dynamic-mfrl-is" target="_blank" class="project-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.29 6.29l1.42-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10"/></svg>
+      </div>
+      <div class="project-title">Automated AI Outreach Bot</div>
+      <div class="project-desc">
+        End-to-end AI prospecting &amp; outreach MVP on Azure. Discovers leads via LLM-generated
+        search queries, enriches profiles with relevance scoring, drafts personalised emails,
+        and surfaces LinkedIn profiles — all from a single FastAPI workflow.
+      </div>
+      <div class="project-tags">
+        <span class="tag">FastAPI</span>
+        <span class="tag">Azure OpenAI</span>
+        <span class="tag">LLM Agents</span>
+        <span class="tag">SerpAPI</span>
+        <span class="tag">Python</span>
+      </div>
+      <a href="https://github.com/nikikotecha/automated-outreach" target="_blank" class="project-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <div class="project-title">Transformer Hawkes Process for Polymarket</div>
+      <div class="project-desc">
+        Applied transformer-based Hawkes process models to prediction market data from
+        Polymarket. Models temporal event dependencies and information flow to better
+        understand and predict market dynamics.
+      </div>
+      <div class="project-tags">
+        <span class="tag">Transformers</span>
+        <span class="tag">Hawkes Process</span>
+        <span class="tag">Prediction Markets</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Time Series</span>
+      </div>
+      <a href="https://github.com/nikikotecha/transformer_hawkes_process_polymarket" target="_blank" class="project-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── EDUCATION ─────────────────────────────────────── -->
+<div class="container" id="education">
+  <div class="section-eyebrow">education</div>
+  <h2>Where I Studied</h2>
+  <div class="edu-grid fade-up">
+
+    <div class="edu-card">
+      <div class="edu-school">Imperial College London</div>
+      <div class="edu-degree">PhD, Artificial Intelligence</div>
+      <div class="edu-date">October 2022 – Present</div>
+      <div class="edu-desc">
+        Scalable Autonomous Agents for Complex System Decision-Making. Research spans
+        multi-agent reinforcement learning, game-theoretic analysis, equilibrium computation,
+        mean field approximation, and LLM integration. Applications in supply chain
+        optimisation and decentralised decision-making.
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-school">University of Cambridge</div>
+      <div class="edu-degree">MEng / BA, Chemical Engineering</div>
+      <div class="edu-date">October 2018 – July 2022</div>
+      <div class="edu-desc">
+        Core studies in process calculations, fluid mechanics, heat and mass transfer,
+        and biotechnology fundamentals. Strong grounding in systems thinking,
+        sustainability, quantitative modelling, and process optimisation.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ─── CONTACT ────────────────────────────────────────── -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow">contact</div>
+    <h2>Let's Connect</h2>
+    <p class="section-lead" style="margin-bottom: 0;">
+      Open to research collaborations, industry opportunities, and interesting
+      conversations about AI, multi-agent systems, and complex decision-making.
+    </p>
+    <div class="contact-links fade-up">
+      <a href="mailto:nikikotecha6@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        nikikotecha6@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/niki-kotecha/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/nikikotecha" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://scholar.google.co.uk/citations?user=Wc-R7-gAAAAJ&hl=en&oi=ao" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+        Google Scholar
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-text">© 2026 Niki Kotecha</span>
+    <span class="footer-text">Built with care · Hosted on GitHub Pages</span>
+  </footer>
+</div>
+
+<!-- ─── JS ────────────────────────────────────────────── -->
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+    });
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+</script>
+
+</body>
+</html>
