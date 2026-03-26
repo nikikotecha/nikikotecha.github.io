@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #ffffff;
+  --bg-soft:      #f7f7fb;
+  --bg-card:      #ffffff;
+  --text:         #0f0e17;
+  --text-muted:   #5c5f72;
+  --text-light:   #9ca3af;
+  --accent:       #6366f1;
+  --accent-dark:  #4f46e5;
+  --accent-light: #e0e7ff;
+  --accent-soft:  #f5f3ff;
+  --border:       #e4e4ee;
+  --border-soft:  #f0f0f7;
+  --mono:         'JetBrains Mono', monospace;
+  --sans:         'Inter', sans-serif;
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.06);
+  --shadow:       0 4px 20px rgba(0,0,0,0.08);
+  --radius:       14px;
+  --radius-sm:    8px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── FADE UP ANIMATION ───────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── SECTION HELPERS ─────────────────────────────── */
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.section-eyebrow::before { content: '# '; opacity: 0.45; }
+
+.section-lead {
+  font-size: 1.02rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  line-height: 1.85;
+  margin-bottom: 3rem;
+}
+
+/* ─── BUTTONS ─────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  font-family: var(--sans);
+}
+.btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(99,102,241,0.38);
+}
+
+.btn-ghost {
+  background: var(--bg-soft);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ─── BADGE ───────────────────────────────────────── */
+.badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.15rem 0.55rem;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-light);
+}
+
+/* ─── TAG ─────────────────────────────────────────── */
+.tag {
+  font-family: var(--mono);
+  font-size: 0.69rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--border-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* ─── DIVIDER ─────────────────────────────────────── */
+.divider { height: 1px; background: var(--border); max-width: 1080px; margin: 0 auto; }
+
+/* ─── CONTAINER ───────────────────────────────────── */
+.container { max-width: 1080px; margin: 0 auto; padding: 5rem 2.5rem; }
+
+@media (max-width: 600px) {
+  .container { padding: 3.5rem 1.5rem; }
+}
