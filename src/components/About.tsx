@@ -33,7 +33,7 @@ export default function About() {
                 marginBottom: "1.25rem",
               }}
             >
-              I'm a PhD researcher at{" "}
+              I&apos;m a PhD researcher at{" "}
               <strong style={{ color: "var(--text)", fontWeight: 600 }}>
                 Imperial College London
               </strong>{" "}
@@ -65,7 +65,7 @@ export default function About() {
                 fontSize: "1.02rem",
               }}
             >
-              Outside research, I've worked as an{" "}
+              Outside research, I&apos;ve worked as an{" "}
               <strong style={{ color: "var(--text)", fontWeight: 600 }}>
                 AI Researcher at Ergodic AI
               </strong>

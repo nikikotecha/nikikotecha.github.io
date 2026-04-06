@@ -27,7 +27,7 @@ export default function Contact() {
             marginBottom: "0.7rem",
           }}
         >
-          Let's Connect
+          Let&apos;s Connect
         </h2>
         <p
           style={{

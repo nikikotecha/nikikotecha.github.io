@@ -25,6 +25,24 @@ const posts = [
       "The economics of LLMs mean enterprises can now run hundreds of AI teams in parallel. The bottleneck isn't capability — it's coordination. Why MARL is the right frame for thinking about what comes next.",
     tags: ["LLMs", "MARL", "Enterprise AI"],
   },
+  {
+    slug: "the-attention-problem",
+    title: "The Attention Problem",
+    date: "March 2025",
+    readTime: "6 min",
+    excerpt:
+      "LLMs are expensive because attention scales quadratically. That's not just an infrastructure cost — it's a coordination bottleneck in disguise, and it shapes everything about how you architect multi-agent systems.",
+    tags: ["Architecture", "LLMs", "Multi-Agent Systems"],
+  },
+  {
+    slug: "against-end-to-end-agents",
+    title: "Against End-to-End Agents",
+    date: "February 2025",
+    readTime: "7 min",
+    excerpt:
+      "The pitch for fully autonomous agents is compelling. The reality is systems that fail silently, can't be debugged, and don't ship. A defence of modular, composable pipelines.",
+    tags: ["Engineering", "Agent Systems"],
+  },
 ];
 
 export default function BlogPage() {

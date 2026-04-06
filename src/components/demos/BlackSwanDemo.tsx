@@ -412,7 +412,7 @@ export default function BlackSwanDemo() {
         </h2>
         <p className="section-lead" style={{ marginBottom: "1.75rem" }}>
           A council of 10 AI specialists — sanctions lawyers, trade experts, supply chain analysts —
-          continuously screens thousands of articles and surfaces only what's material to your risk
+          continuously screens thousands of articles and surfaces only what&apos;s material to your risk
           profile. Click any article below to see the full council reasoning.
         </p>
 

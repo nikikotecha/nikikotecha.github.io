@@ -40,7 +40,7 @@ export default function Experience() {
           marginBottom: "0.7rem",
         }}
       >
-        Where I've Worked
+        Where I&apos;ve Worked
       </h2>
       <p className="section-lead">
         Industry experience spanning AI research and venture capital, bridging

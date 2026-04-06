@@ -89,7 +89,7 @@ export default function Projects() {
           marginBottom: "0.7rem",
         }}
       >
-        What I've Built
+        What I&apos;ve Built
       </h2>
       <p className="section-lead">
         Research projects at the frontier of multi-agent systems, reinforcement
@@ -116,7 +116,7 @@ function ProjectCard({
   icon,
   title,
   desc,
-  bullets,
+  bullets: _bullets,
   tags,
   href,
 }: {

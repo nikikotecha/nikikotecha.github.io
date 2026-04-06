@@ -26,7 +26,6 @@ const EDGE_DEFS = [
 ] as const;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type NodeId = typeof NODE_DEFS[number]["id"];
 
 interface NodeState {
   inventory: number;
