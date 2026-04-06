@@ -44,7 +44,6 @@ export default function BlogPage() {
               color: "var(--text-muted)",
               textDecoration: "none",
               marginBottom: "2.5rem",
-              transition: "color 0.2s",
             }}
           >
             ← Home
@@ -74,18 +73,11 @@ export default function BlogPage() {
             to build truly intelligent organisations.
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             {posts.map((post, i) => (
               <div key={post.slug}>
-                <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
-                  <div
-                    style={{
-                      padding: "2rem 0",
-                      transition: "opacity 0.2s",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                  >
+                <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
+                  <div style={{ padding: "2rem 0" }}>
                     <div
                       style={{
                         display: "flex",
@@ -135,12 +127,22 @@ export default function BlogPage() {
                     >
                       {post.excerpt}
                     </p>
-                    <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", alignItems: "center" }}>
                       {post.tags.map((t) => (
                         <span key={t} className="tag">
                           {t}
                         </span>
                       ))}
+                      <span
+                        style={{
+                          marginLeft: "auto",
+                          fontFamily: "var(--mono)",
+                          fontSize: "0.72rem",
+                          color: "var(--accent)",
+                        }}
+                      >
+                        Read →
+                      </span>
                     </div>
                   </div>
                 </Link>
