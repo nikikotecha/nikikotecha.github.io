@@ -17,6 +17,19 @@ const demos = [
     ),
     status: "live",
   },
+  {
+    href: "/demos/blackswan",
+    title: "BlackSwan Intelligence Platform",
+    desc: "A 10-persona AI council screens geopolitical news for consultants — sanctions, trade controls, supply chain risk. Click any article to see every specialist's score and the chairman's synthesis.",
+    tags: ["LLM", "Geopolitical Risk", "Multi-Agent"],
+    icon: (
+      <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth={1.8}>
+        <circle cx={12} cy={12} r={3} />
+        <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+      </svg>
+    ),
+    status: "live",
+  },
 ];
 
 export default function DemosSection() {
@@ -208,7 +221,7 @@ export default function DemosSection() {
                 lineHeight: 1.7,
               }}
             >
-              Polymarket AI Dashboard · Game Theory Playground
+              Game Theory Playground · Polymarket AI Dashboard
             </div>
           </div>
         </div>
